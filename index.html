@@ -1,9 +1,9 @@
 <meta charset="utf-8">
-<title>O Plano 10k — Easy Builder</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧱</text></svg>">
+<title>Cockpit · Obra 10k — Easy Builder</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏗</text></svg>">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta property="og:title" content="O Plano 10k — O Motor de Tijolos">
-<meta property="og:description" content="O mapa vivo do plano: funil anti-prospecção, o motor de tijolos e os 4 pilares — navegue, dê zoom, explore.">
+<meta property="og:title" content="Cockpit Builder · Obra 10k">
+<meta property="og:description" content="A cabine de onde o builder opera a obra: funil anti-prospecção, o Motor de Tijolos e os 4 pilares — navegue, dê zoom, explore.">
 <meta name="theme-color" content="#0c1018">
 <div id="viewport">
 <div id="world">
@@ -3477,8 +3477,18 @@ window.P2={
     '.viewdock button.on{background:rgba(78,125,246,.22);color:#fff}'+
     '.viewdock kbd{font:600 9px/1 inherit;font-family:inherit;color:rgba(235,240,250,.45);border:1px solid rgba(255,255,255,.18);'+
     'border-radius:4px;padding:2px 4px;min-width:8px;text-align:center}'+
-    '.viewdock .vd-hint{color:rgba(235,240,250,.35);font:500 10px/1.3 inherit;font-family:inherit;padding:0 8px;border-left:1px solid rgba(255,255,255,.1);margin-left:2px}';
+    '.viewdock .vd-hint{color:rgba(235,240,250,.35);font:500 10px/1.3 inherit;font-family:inherit;padding:0 8px;border-left:1px solid rgba(255,255,255,.1);margin-left:2px}'+
+    '.cockpit-badge{position:fixed;top:14px;left:16px;z-index:1000;pointer-events:none;display:flex;align-items:baseline;gap:8px;'+
+    'background:rgba(10,14,24,.88);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:8px 16px;'+
+    'backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 8px 30px rgba(0,0,0,.45)}'+
+    '.cockpit-badge b{font:800 12px/1 inherit;font-family:inherit;color:#fff;letter-spacing:.14em}'+
+    '.cockpit-badge span{font:600 11px/1 inherit;font-family:inherit;color:rgba(235,240,250,.55);letter-spacing:.08em}';
   document.head.appendChild(st);
+  if(!/[?&]edit=1/.test(location.search)){
+    var badge=document.createElement('div');badge.className='cockpit-badge';
+    badge.innerHTML='<b>🏗 COCKPIT BUILDER</b><span>OBRA 10K · EASY BUILDER</span>';
+    document.addEventListener('DOMContentLoaded',function(){document.body.appendChild(badge);});
+  }
 
   window.addEventListener('load',function(){setTimeout(function(){
     var A=window.CanvasAPI;if(!A||!A.frameAll)return;
