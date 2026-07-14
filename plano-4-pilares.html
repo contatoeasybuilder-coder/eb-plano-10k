@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧱</text></svg>">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>O Plano [10k26/27] — Os 4 Pilares</title>
+<style>
+  :root{
+    --ground:#0c1018; --ground-2:#111826; --panel:#141c2b; --panel-2:#182130;
+    --slab:#20283a; --slab-2:#28324a; --slab-line:rgba(255,255,255,.06);
+    --ink:#eef2fb; --ink-dim:#9aa7be; --ink-faint:#5d6a83;
+    --hair:rgba(255,255,255,.09);
+    --amber:#f5b23f; --blue:#4e7df6; --green:#54c98a; --cyan:#33c6d6;
+    --purple:#9e6cf2; --orange:#f26a43;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono","JetBrains Mono","Cascadia Mono",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--ground);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+  body{
+    background:
+      radial-gradient(1200px 600px at 70% -10%, rgba(245,178,63,.06), transparent 60%),
+      radial-gradient(900px 500px at 10% 110%, rgba(78,125,246,.05), transparent 60%),
+      var(--ground);
+    min-height:100vh; padding:48px clamp(20px,4vw,64px) 96px;
+  }
+
+  /* ---------- header ---------- */
+  .hd{max-width:1560px;margin:0 auto 40px}
+  .hd .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--amber);text-transform:uppercase}
+  .hd h1{font-size:clamp(28px,3.4vw,46px);line-height:1.05;letter-spacing:-.02em;margin:10px 0 12px;font-weight:800}
+  .hd h1 b{color:var(--amber)}
+  .hd .lede{color:var(--ink-dim);font-size:clamp(14px,1.2vw,17px);max-width:760px;line-height:1.55}
+  .hd .lede b{color:var(--ink)}
+  .thesis{
+    display:inline-flex;align-items:center;gap:10px;margin-top:18px;
+    font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--ink-dim);
+    border:1px solid var(--hair);border-radius:999px;padding:8px 16px;background:rgba(255,255,255,.02)
+  }
+  .thesis b{color:var(--amber)}
+
+  /* ---------- legenda de badges ---------- */
+  .legend{max-width:1560px;margin:0 auto 26px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+  .legend .lg{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--ink-dim);display:inline-flex;align-items:center;gap:6px}
+  .legend .lg i{font-style:normal}
+  .legend .hint{margin-left:auto;font-family:var(--mono);font-size:10.5px;color:var(--ink-faint)}
+
+  /* ---------- grid de pilares ---------- */
+  .pillars{
+    max-width:1560px;margin:0 auto;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;align-items:start
+  }
+
+  .pillar{border-radius:16px;background:linear-gradient(180deg,var(--panel),var(--panel-2));border:1px solid var(--hair);overflow:hidden}
+  .p-head{padding:20px 20px 16px;border-bottom:1px solid var(--slab-line);position:relative}
+  .p-head::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--pc)}
+  .p-num{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--pc)}
+  .p-name{font-size:20px;font-weight:800;letter-spacing:-.01em;margin:6px 0 4px}
+  .p-sub{font-size:12.5px;color:var(--ink-dim);line-height:1.45}
+
+  /* régua sistema × builder */
+  .meter{padding:14px 20px 6px}
+  .m-track{height:6px;border-radius:99px;background:var(--slab);overflow:hidden;position:relative}
+  .m-fill{height:100%;border-radius:99px;background:var(--pc);width:0;transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
+  .m-labels{display:flex;justify-content:space-between;margin-top:7px;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:var(--ink-faint)}
+  .m-labels .on{color:var(--pc)}
+
+  /* ---------- tijolos ---------- */
+  .bricks{padding:14px 14px 18px;display:flex;flex-direction:column;gap:9px}
+  .brick{
+    border:1px solid var(--slab-line);border-bottom:3px solid rgba(0,0,0,.45);
+    background:linear-gradient(180deg,var(--slab),color-mix(in srgb,var(--slab) 84%,black));
+    border-radius:10px;cursor:pointer;transition:transform .16s ease,border-color .16s ease;
+    -webkit-user-select:none;user-select:none
+  }
+  .brick:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--pc) 45%,transparent)}
+  .b-row{display:flex;align-items:center;gap:10px;padding:12px 14px}
+  .b-name{font-size:14.5px;font-weight:700;letter-spacing:-.01em}
+  .b-tag{margin-left:auto;font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--ink-faint);white-space:nowrap}
+  .b-tag.sys{color:var(--pc)}
+  .b-caret{color:var(--ink-faint);font-size:10px;transition:transform .2s}
+  .brick.open .b-caret{transform:rotate(90deg)}
+
+  .b-body{display:none;padding:0 14px 13px}
+  .brick.open .b-body{display:block}
+  .b-line{font-size:12.5px;color:var(--ink-dim);line-height:1.5;margin-bottom:10px}
+  .tools{display:flex;flex-wrap:wrap;gap:6px}
+  .tool{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.02em;
+    padding:5px 9px;border-radius:7px;border:1px solid var(--hair);
+    background:rgba(255,255,255,.03);color:var(--ink);display:inline-flex;gap:6px;align-items:center
+  }
+  .tool i{font-style:normal;font-size:10px}
+  .tool.ia i{color:var(--purple)} .tool.tpl i{color:var(--orange)}
+  .tool.aula i{color:var(--cyan)} .tool.sys i{color:var(--green)}
+  .tool.com i{color:var(--amber)}
+
+  /* tijolo "na unha" */
+  .brick.unha{background:transparent;border:1px dashed rgba(255,255,255,.18);border-bottom:1px dashed rgba(255,255,255,.18)}
+  .brick.unha:hover{border-color:color-mix(in srgb,var(--pc) 55%,transparent)}
+  .unha-note{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;color:var(--amber);
+    display:inline-flex;gap:7px;align-items:center;padding:5px 9px;border-radius:7px;
+    border:1px dashed rgba(245,178,63,.4);background:rgba(245,178,63,.06)
+  }
+
+  /* selo FAZ PRIMEIRO opcional */
+  .b-first{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;color:#0c1018;background:var(--amber);border-radius:4px;padding:3px 6px;font-weight:700}
+
+  /* ---------- rodapé leitura ---------- */
+  .ft{max-width:1560px;margin:44px auto 0;border-top:1px solid var(--slab-line);padding-top:22px;
+      display:flex;flex-wrap:wrap;gap:18px;align-items:baseline;justify-content:space-between}
+  .ft .read{font-size:14px;color:var(--ink-dim);max-width:820px;line-height:1.6}
+  .ft .read b{color:var(--ink)}
+  .ft .stamp{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--ink-faint)}
+
+  @media (max-width:720px){ body{padding:32px 16px 72px} }
+</style>
+</head>
+<body>
+
+<header class="hd">
+  <span class="kicker">O PLANO [10K26/27] · A PLANTA DA OBRA</span>
+  <h1>É isso que tem que construir.<br><b>E aqui está o ferramental.</b></h1>
+  <p class="lede">Quatro pilares sustentam os 10k por mês. Cada tijolo é uma competência que <b>tem</b> que existir na tua obra — e onde o ecossistema tem ferramenta, ela aparece embaixo do tijolo. Onde não tem, é na unha mesmo: continua possível, só que você carrega o peso.</p>
+  <span class="thesis">O builder pensa, <b>o sistema constrói</b></span>
+</header>
+
+<div class="legend">
+  <span class="lg"><i style="color:var(--purple)">✦</i> IA</span>
+  <span class="lg"><i style="color:var(--orange)">▤</i> Template</span>
+  <span class="lg"><i style="color:var(--cyan)">▶</i> Aula</span>
+  <span class="lg"><i style="color:var(--green)">⚙</i> Sistema / ferramenta</span>
+  <span class="lg"><i style="color:var(--amber)">👥</i> Comunidade</span>
+  <span class="lg"><i style="color:var(--amber)">🔨</i> Na unha — você constrói</span>
+  <span class="hint">clique no tijolo pra abrir o ferramental</span>
+</div>
+
+<main class="pillars" id="pillars"></main>
+
+<footer class="ft">
+  <p class="read">Repara na régua de cada pilar: <b>quanto mais perto da entrega, mais o sistema constrói</b> — quanto mais perto de você, mais você constrói. O Pilar 1 é quase todo ferramentado. O Pilar 4 é quase todo humano. É proposital: ferramenta compra tempo, <b>caráter de obra não se terceiriza</b>.</p>
+  <span class="stamp">EASY BUILDER · PLANO [10K26/27]</span>
+</footer>
+
+<script>
+const T = { ia:'✦', tpl:'▤', aula:'▶', sys:'⚙', com:'👥' };
+
+const PILLARS = [
+  {
+    num:'PILAR 01', name:'Entrega de alto valor', color:'var(--blue)', meter:90,
+    sub:'O que sai da tua mão. A página no padrão de quem cobra caro — em dias, não semanas.',
+    bricks:[
+      { n:'Estratégia da página', first:true, line:'O que a página precisa ter pra converter — decidido antes de abrir qualquer ferramenta.',
+        tools:[['ia','IA 05 Estrutura de Sites']] },
+      { n:'Copy', line:'O texto que vende. Estrutura, dores, desejos e CTA alinhados — o design bom não salva copy fraca.',
+        tools:[['ia','IA 06 Easy Copy']] },
+      { n:'Design', line:'Direção visual com intenção: arquétipo, paleta, tipografia. Nunca do zero, nunca genérico.',
+        tools:[['sys','Extensão EB · 1.000+ componentes'],['ia','IA 09 Diretor Criativo'],['aula','Design Easy']] },
+      { n:'Imagem e direção visual', line:'Imagem profissional no padrão da peça, sem banco de imagem genérico.',
+        tools:[['ia','IA 10 Easy Image']] },
+      { n:'Código e efeitos', line:'Animação, hover, CSS avançado — o acabamento que separa página de página cara.',
+        tools:[['ia','IA 11 Easy Coder']] },
+      { n:'Responsividade', line:'Perfeita em toda tela. Nos componentes do EB ela já vem pronta — zero ajuste manual.',
+        tools:[['sys','Automática nos componentes EB']] },
+      { n:'Otimização', line:'Velocidade, performance e peso da página. Site lento devolve o cliente pro concorrente.',
+        tools:[['sys','Backup otimizado'],['aula','Easy Optimize']] },
+      { n:'Implementação técnica', line:'WordPress, plugins, cache, segurança e tema de pé em minutos.',
+        tools:[['sys','Backup WordPress em 3 cliques']] },
+      { n:'Qualidade antes de enviar', line:'O gate: a página só sai quando passa. Protege preço e reputação.',
+        tools:[['ia','IA 12 Analisador de Páginas']] },
+    ]
+  },
+  {
+    num:'PILAR 02', name:'Valor percebido', color:'var(--green)', meter:70,
+    sub:'Como o mercado te vê. Ser encontrado, ser desejado e cobrar o preço que você pede.',
+    bricks:[
+      { n:'Posicionamento', first:true, line:'Uma frase: quem você atende e o que entrega. Vira bio, portfólio e conteúdo.',
+        tools:[['ia','IA 02 ICP e Posicionamento'],['aula','Anti Prospecção']] },
+      { n:'Portfólio', line:'3 projetos no ar. Sem cliente ainda? Projeto conceito conta igual.',
+        tools:[['tpl','Template Portfólio (Figma automático)']] },
+      { n:'Instagram', line:'Bio que diz o que você faz, grid de projeto, busca te encontrando.',
+        tools:[['tpl','Template Carrossel'],['ia','IA 07 Copy Carrossel'],['aula','Reels N3'],['aula','SEO no Instagram']] },
+      { n:'Plano de negócio', line:'Saber onde está e o que atacar. A planta da obra do negócio todo.',
+        tools:[['sys','O Plano [10k26/27]'],['ia','IA 01 Análise Estratégica']] },
+      { n:'Atendimento', line:'Investiga antes de dar preço. A conversa conduzida até o sim.',
+        tools:[['ia','IA 03 Atendimento e Negociação'],['ia','IA 04 Webson Vendedor'],['aula','Easy Sales']] },
+      { n:'Proposta profissional', line:'O documento que apresenta o preço. Amador no zap derruba o ticket na hora.',
+        tools:[['tpl','Template de Proposta']] },
+      { n:'Precificação pelo valor', line:'Preço com critério, não com medo. Margem calculada antes da conversa.',
+        tools:[['sys','Planilha Financeira'],['ia','IA 01 Análise Estratégica']] },
+      { n:'Prova social', line:'Depoimento e case publicado. Pede hoje, publica essa semana.',
+        tools:[['sys','Processo de coleta de depoimento']] },
+      { n:'Eficiência', line:'Responder rápido e entregar rápido vira percepção de valor — o Pilar 1 inteiro trabalha aqui.',
+        tools:[['sys','Pilar 01 a favor']] },
+      { n:'Postura', unha:true, line:'Segurança na conversa, palavra cumprida, presença de profissional. Não tem IA pra isso — tem referência e ambiente (Pilar 4).' },
+      { n:'Tráfego pago · nitro', line:'Só se quiser acelerar. R$10/dia já valida.',
+        tools:[['ia','IA 08 Copy Ads'],['aula','Tráfego N3']] },
+    ]
+  },
+  {
+    num:'PILAR 03', name:'Gestão e eficiência', color:'var(--cyan)', meter:60,
+    sub:'O negócio por dentro. Água e luz instaladas antes do cliente entrar — nada range.',
+    bricks:[
+      { n:'Onboarding do cliente', first:true, line:'Todo projeto entra pelo mesmo trilho: proposta, contrato, briefing. Começo padrão mata refação.',
+        tools:[['tpl','Formulário de Briefing'],['tpl','Template de Proposta'],['tpl','Template de Contrato']] },
+      { n:'Entregar no prazo', line:'Prazo cumprido é reputação composta. A esteira segura o combinado.',
+        tools:[['sys','Esteira no ClickUp · Setup Builder']] },
+      { n:'Conciliar as demandas', line:'Vários projetos ao mesmo tempo sem deixar bola cair.',
+        tools:[['sys','ClickUp + pasta modelo']] },
+      { n:'Controlar os processos', line:'Checklist em cada etapa. O processo lembra por você.',
+        tools:[['sys','Setup Builder · checklists da esteira']] },
+      { n:'Proteger escopo e contrato', line:'Mata o "só mais um ajuste". Escopo fechado por escrito.',
+        tools:[['tpl','Template de Contrato']] },
+      { n:'Controle financeiro', line:'Indicadores e controle: saber se tem lucro, não achar.',
+        tools:[['sys','Planilha Financeira']] },
+      { n:'Projetar crescimento', line:'Projetos × ticket. As duas alavancas do 10k acompanhadas todo mês.',
+        tools:[['sys','Planilha Financeira'],['ia','IA 01 Análise Estratégica']] },
+      { n:'Delegar', unha:true, line:'Ninguém delega caos. A esteira documentada (tijolos acima) é o que torna teu processo delegável — mas entregar o volante é decisão tua.' },
+    ]
+  },
+  {
+    num:'PILAR 04', name:'Ambiente e mentalidade', color:'var(--amber)', meter:25,
+    sub:'Onde você constrói e como você pensa. Sozinho e com a mente velha, a obra para — este pilar segura os outros três.',
+    bricks:[
+      { n:'Mudar a mente', first:true, line:'Não recomeçar sempre, decisão firme, projeto terminado. De fazedor de página pra dono de obra.',
+        tools:[['aula','Mentalidade Builder']] },
+      { n:'Mentalidade de abundância', line:'Ninguém esconde o jogo: tem cliente e dinheiro pra todo mundo. Concorrente vira parceiro.',
+        tools:[['com','Comunidade Builder']] },
+      { n:'Estar no ambiente certo', line:'Lugar onde vender página de R$3.000 a R$8.000 é o normal — a visão de mercado muda por osmose.',
+        tools:[['com','Comunidade WhatsApp'],['com','Discord · Nichos · Behance']] },
+      { n:'Cuidar com quem anda', line:'Feedback construtivo sem julgamento, ajuda a qualquer hora. Ritmo emprestado nos dias sem vontade.',
+        tools:[['com','Turma do bootcamp']] },
+      { n:'Acessar mentes que construíram', line:'Atalho de década: 14 mentorias gravadas + 1 nova todo mês com especialistas.',
+        tools:[['com','Mentorias mensais'],['com','Lucas Neves · vendas gringa'],['com','Luan Shimoda · tráfego'],['com','Lorenzi dentro da comunidade']] },
+      { n:'Networking e oportunidades', line:'Indicação de trabalho, parceria fechada, proposta circulando dentro da própria comunidade.',
+        tools:[['com','Indicações e parcerias'],['com','Expor projeto no Behance/Nichos']] },
+      { n:'Ritmo e constância', line:'A obra não pode parar. Semana com vistoria: o que precisa existir no fim de cada uma.',
+        tools:[['sys','As 4 semanas do Plano'],['sys','Vistorias']] },
+      { n:'Pedir ajuda quando trava', line:'Suporte instantâneo, 24h, na unha. Ninguém atravessa a obra calado.',
+        tools:[['com','Comunidade'],['sys','Suporte na ferramenta']] },
+    ]
+  },
+];
+
+const root = document.getElementById('pillars');
+
+PILLARS.forEach(p => {
+  const col = document.createElement('section');
+  col.className = 'pillar';
+  col.style.setProperty('--pc', p.color);
+
+  const bricksHtml = p.bricks.map((b,i) => {
+    const tools = (b.tools||[]).map(([k,label]) =>
+      `<span class="tool ${k}"><i>${T[k]}</i>${label}</span>`).join('');
+    const body = b.unha
+      ? `<p class="b-line">${b.line}</p><span class="unha-note">🔨 NA UNHA — você constrói</span>`
+      : `<p class="b-line">${b.line}</p><div class="tools">${tools}</div>`;
+    const tag = b.unha
+      ? `<span class="b-tag">🔨 NA UNHA</span>`
+      : `<span class="b-tag sys">${(b.tools||[]).length} FERRAMENTA${(b.tools||[]).length>1?'S':''}</span>`;
+    return `<div class="brick ${b.unha?'unha':''}" data-i="${i}">
+      <div class="b-row">
+        <span class="b-caret">▶</span>
+        <span class="b-name">${b.n}</span>
+        ${b.first?'<span class="b-first">FAZ PRIMEIRO</span>':''}
+        ${tag}
+      </div>
+      <div class="b-body">${body}</div>
+    </div>`;
+  }).join('');
+
+  col.innerHTML = `
+    <div class="p-head">
+      <span class="p-num">${p.num}</span>
+      <h2 class="p-name">${p.name}</h2>
+      <p class="p-sub">${p.sub}</p>
+    </div>
+    <div class="meter">
+      <div class="m-track"><div class="m-fill" data-w="${p.meter}"></div></div>
+      <div class="m-labels">
+        <span class="${p.meter>=50?'on':''}">O SISTEMA CONSTRÓI</span>
+        <span class="${p.meter<50?'on':''}">VOCÊ CONSTRÓI</span>
+      </div>
+    </div>
+    <div class="bricks">${bricksHtml}</div>`;
+
+  root.appendChild(col);
+});
+
+// abre/fecha tijolo
+root.addEventListener('click', e => {
+  const brick = e.target.closest('.brick');
+  if (brick) brick.classList.toggle('open');
+});
+
+// anima réguas na carga
+requestAnimationFrame(() => {
+  setTimeout(() => document.querySelectorAll('.m-fill')
+    .forEach(el => el.style.width = el.dataset.w + '%'), 120);
+});
+</script>
+</body>
+</html>
