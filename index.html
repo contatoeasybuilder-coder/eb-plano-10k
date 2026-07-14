@@ -1,7 +1,6 @@
 <meta charset="utf-8">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧱</text></svg>">
-
 <title>O Plano 10k — Easy Builder</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧱</text></svg>">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:title" content="O Plano 10k — O Motor de Tijolos">
 <meta property="og:description" content="O mapa vivo do plano: funil anti-prospecção, o motor de tijolos e os 4 pilares — navegue, dê zoom, explore.">
@@ -3522,7 +3521,22 @@ window.P2={
 })();
 </script>
 
-<script>window.DEFAULT_STATE=null;/*DEFAULT_STATE_AQUI*/</script>
+<script>
+(function(){
+  // botão: exportar o arranjo atual do canvas como arquivo
+  function dl(){var s=localStorage.getItem('motor-tijolos-canvas-v4');
+    if(!s){alert('nenhum arranjo salvo ainda nesta página');return}
+    var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([s]));
+    a.download='layout-10k.json';a.click();}
+  var tb=document.querySelector('.toolbar');
+  if(tb){var g=document.createElement('div');g.className='tb-group';
+    var b=document.createElement('button');b.className='tb';b.type='button';b.textContent='⬇ layout';
+    b.title='baixar o arranjo atual (layout-10k.json)';b.addEventListener('click',dl);
+    g.appendChild(b);tb.appendChild(g);}
+})();
+</script>
+
+<script>window.DEFAULT_STATE={"nodes":{"nTimeline":{"x":-2845,"y":3071,"s":1},"nWheel":{"x":6810,"y":1302,"s":1},"nBase":{"x":6992,"y":2065,"s":1},"nLegend":{"x":1908,"y":1790,"s":1},"n-titulo":{"x":1620,"y":-400,"s":1},"n-zona":{"x":2320,"y":160,"s":1},"n-behance":{"x":1941,"y":-551,"s":1},"n-sniper":{"x":2470,"y":-280,"s":1},"n-indicacoes":{"x":2710,"y":-280,"s":1},"n-trafego-gratuito":{"x":2990,"y":-180,"s":1},"n-busca-seo":{"x":1560,"y":120,"s":1},"n-video-n3-alto-valor-e-baixo-alcance":{"x":1520,"y":620,"s":1},"n-pesca-em-balde":{"x":1550,"y":1240,"s":1},"n-n3-trafego":{"x":3100,"y":270,"s":1},"n-instagram-posicionado":{"x":2390,"y":240,"s":1},"n-qualificacao":{"x":2020,"y":1380,"s":1},"n-link-bio":{"x":2380,"y":1260,"s":1},"n-trafego-pago-2":{"x":3100,"y":1320,"s":1},"n-nota":{"x":1620,"y":-260,"s":1},"n-nota-2":{"x":2860,"y":1940,"s":1},"n-titulo-2":{"x":-1640,"y":-300,"s":1},"n-zona-2":{"x":-1680,"y":-120,"s":1},"n-nota-3":{"x":-1640,"y":-140,"s":1},"n-balde-furado-torneira":{"x":-1508,"y":40,"s":1},"n-os-dois-balcoes-meio-fim":{"x":-2613,"y":63,"s":1},"n-furadeira-quadro-na-parede":{"x":-2623,"y":1231,"s":1},"n-o-80-20-da-tua-fase":{"x":-1547,"y":1192,"s":1},"n-os-12-meses":{"x":-1617,"y":1793,"s":1},"n-referencia-pinterest":{"x":-751,"y":3006,"s":1},"n-servico-solucao":{"x":-3790,"y":35,"s":1},"n-zona-3":{"x":3980,"y":-190,"s":1},"n-titulo-3":{"x":4040,"y":-480,"s":1},"n-nota-4":{"x":4630,"y":-480,"s":1},"n-nota-5":{"x":5030,"y":-480,"s":1},"n-nota-6":{"x":4040,"y":-135,"s":1},"n-semana-1":{"x":4060,"y":0,"s":1},"n-semana-2":{"x":4700,"y":0,"s":1},"n-semana-3":{"x":5340,"y":0,"s":1},"n-semana-4":{"x":6019,"y":-43,"s":1},"n-a-conta-do-10k":{"x":-4701,"y":188,"s":1},"n-nota-7":{"x":4060,"y":830,"s":1},"n-nota-8":{"x":5980,"y":830,"s":1},"p2-title":{"x":1620,"y":2140,"s":1},"p2-zone-conversa":{"x":1840,"y":2220,"s":1},"p2-zone-loop":{"x":1560,"y":5020,"s":1},"p2-behance":{"x":2000,"y":2320,"s":1},"p2-pv":{"x":2440,"y":2300,"s":1},"p2-whatsapp":{"x":2380,"y":3200,"s":1},"p2-reuniao":{"x":1920,"y":4080,"s":1},"p2-proposta":{"x":2367,"y":4127,"s":1},"p2-mensagem":{"x":2780,"y":4079,"s":1},"p2-oferta":{"x":2410,"y":4760,"s":1},"p2-fechado":{"x":2410,"y":5100,"s":1},"p2-insatisfeito":{"x":1820,"y":5100,"s":1},"p2-boaentrega":{"x":2140,"y":5420,"s":1},"p2-bomrel":{"x":2540,"y":5420,"s":1},"p2-satisfeito":{"x":2320,"y":5800,"s":1},"p2-depoimento":{"x":1880,"y":5780,"s":1},"p2-conteudo":{"x":1870,"y":6220,"s":1},"p2-indicacoes":{"x":2420,"y":6220,"s":1},"p2-trafego-gratuito":{"x":2720,"y":6200,"s":1},"p2-behance-icone":{"x":2990,"y":6200,"s":1},"p2-pesca":{"x":1600,"y":6480,"s":1},"p2-ig2":{"x":2380,"y":6640,"s":1},"p2-looping":{"x":2410,"y":7400,"s":1},"p2-note-wa":{"x":2860,"y":3500,"s":1},"p2-note-3caminhos":{"x":1660,"y":4820,"s":1},"p2-note-loop":{"x":2880,"y":7040,"s":1},"n-zona-4":{"x":3980,"y":1360,"s":1},"n-titulo-4":{"x":4094,"y":1004,"s":1},"n-nota-9":{"x":4630,"y":1230,"s":1},"n-nota-10":{"x":5080,"y":1230,"s":1},"n-pilar-01":{"x":4040,"y":1455,"s":1},"n-pilar-02":{"x":4677,"y":1463,"s":1},"n-pilar-03":{"x":5340,"y":1482,"s":1},"n-pilar-04":{"x":6045,"y":1465,"s":1}},"user":[],"edges":[],"delN":[],"delE":[]};</script>
 <script>
 (function(){
   if(/[?&]edit=1/.test(location.search))return;
@@ -3530,12 +3544,12 @@ window.P2={
   st.textContent='.toolbar{display:none!important}.port,.rsz,.nt-x{display:none!important}';
   document.head.appendChild(st);
   window.addEventListener('load',function(){setTimeout(function(){
-    document.querySelectorAll('[contenteditable="true"]').forEach(function(e){e.setAttribute('contenteditable','false');});
+    document.querySelectorAll('[contenteditable=\"true\"]').forEach(function(e){e.setAttribute('contenteditable','false');});
   },100);});
   window.addEventListener('keydown',function(e){
     if(e.key==='Delete'||e.key==='Backspace'){
       var t=e.target;
-      if(!(t&&t.closest&&t.closest('input,textarea,[contenteditable="true"]')))e.stopImmediatePropagation();
+      if(!(t&&t.closest&&t.closest('input,textarea,[contenteditable=\"true\"]')))e.stopImmediatePropagation();
     }
   },true);
 })();
