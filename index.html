@@ -3540,6 +3540,12 @@ window.P2={
 <script>
 (function(){
   if(/[?&]edit=1/.test(location.search))return;
+  // modo leitura: nao persiste nada — F5 volta ao layout original
+  try{
+    localStorage.removeItem('motor-tijolos-canvas-v4');
+    var _set=Storage.prototype.setItem;
+    Storage.prototype.setItem=function(k,v){if(k==='motor-tijolos-canvas-v4')return;return _set.apply(this,arguments);};
+  }catch(e){}
   var st=document.createElement('style');
   st.textContent='.toolbar{display:none!important}.port,.rsz,.nt-x{display:none!important}';
   document.head.appendChild(st);
