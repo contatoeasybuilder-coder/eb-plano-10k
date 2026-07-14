@@ -1379,7 +1379,7 @@
   }
   document.querySelectorAll('[data-add]').forEach(function(b){b.addEventListener('click',function(){addNode(b.dataset.add);});});
 
-  window.CanvasAPI={makeNode:makeNode,addEdge:addEdge,fit:fit};
+  window.CanvasAPI={makeNode:makeNode,addEdge:addEdge,fit:fit,deleteNode:deleteNode};
   apply();
   document.querySelectorAll('#world > .node').forEach(function(n){
     if(!n.dataset.nid)n.dataset.nid=n.id||('n'+(nauto++));
@@ -1687,8 +1687,6 @@ window.PIN={"url":"https://br.pinterest.com/pin/942307922027644701/","video":"pi
   var nQua=hideTab(A.makeNode('Qualificação',qualifEl(),FX+40,FY+1440));
   var nBio=hideTab(A.makeNode('Link Bio',linkbioEl(),FX+400,FY+1320));
   var nAd2=hideTab(A.makeNode('Tráfego Pago [2]',adEl('[2] Tráfego Pago'),FX+1120,FY+1380));
-  note(FX-360,FY-200,250,'8 fontes de atenção trabalhando ao mesmo tempo — orgânico, pago, posicionamento e indicação.');
-  note(FX+880,FY+2000,260,'O Link Bio roteia: portfólio, página de vendas, WhatsApp. → Parte 2 do funil.');
 
   // ===== ESQUETE 1: Oceano Azul · Filtro · Balde Furado (tamanho ajustável) =====
   function baldeEl(){
@@ -2817,7 +2815,6 @@ window.PIN={"url":"https://br.pinterest.com/pin/942307922027644701/","video":"pi
   // ===== ESQUETES — palco de conceitos (à esquerda do canvas) =====
   A.makeNode('Título',h('div','ftitle','<small>ESQUETES · CONCEITOS</small>Rabiscos que explicam'),-1640,-300);
   zone(-1680,-120,1280,3320,'#9e6cf2','ESQUETES — CONCEITOS SOLTOS');
-  note(-1640,-140,300,'Palco livre: use ✎ Nota, T Texto, ● Ícone, ◆ Marco, ▭ Tela e puxe setas ● pra rabiscar conceitos antes de virarem representação.');
   hideTab(A.makeNode('Balde Furado + Torneira',baldeEl(),-1560,80));
   hideTab(A.makeNode('Os Dois Balcões — Meio × Fim',balcoesEl(),-1080,80));
   hideTab(A.makeNode('Furadeira > Quadro na parede',furadeiraEl(),-1580,900));
@@ -2907,95 +2904,6 @@ window.PIN={"url":"https://br.pinterest.com/pin/942307922027644701/","video":"pi
     var a=h('a','pk-chip','<i style="color:'+KIND[kind][1]+'">'+KIND[kind][0]+'</i>'+label+'<span class="x">↗</span>');
     a.href=url;a.target='_blank';a.rel='noopener';return a;}
 
-  function weekCard(c){
-    var w=h('div','pkw'); w.style.setProperty('--wk',c.cor);
-    var ph=h('div','pk-h');
-    ph.appendChild(h('div','pk-k',c.num+' · '+c.fase));
-    ph.appendChild(h('div','pk-f',c.titulo));
-    ph.appendChild(h('div','pk-t',c.tese));
-    w.appendChild(ph);
-    var v=h('div','pk-vist');v.appendChild(h('b',null,'VISTORIA · NO FIM DA SEMANA EXISTE'));
-    c.vistoria.forEach(function(t){v.appendChild(h('div',null,'✓ '+t));});
-    w.appendChild(v);
-    var rows=h('div','pk-rows');
-    c.rows.forEach(function(r,i){
-      var row=h('div','pk-row');
-      row.appendChild(h('span','pk-n',String(i+1)));
-      var bd=h('div','pk-bd');
-      bd.appendChild(h('div','pk-s',r.t+(r.first?'<span class="pk-first">FAZ PRIMEIRO</span>':'')));
-      if(r.sub)bd.appendChild(h('div','pk-sub',r.sub));
-      if(r.chips&&r.chips.length){var cw=h('div','pk-chips');
-        r.chips.forEach(function(cp){cw.appendChild(chip(cp[0],cp[1],cp[2]));});bd.appendChild(cw);}
-      row.appendChild(bd);rows.appendChild(row);
-    });
-    w.appendChild(rows);
-    return w;}
-
-  var WEEKS=[
-    {num:'SEMANA 1',fase:'FUNDAÇÃO',cor:'#54c98a',
-     titulo:'O posicionamento no chão',
-     tese:'Sem fundação nada fica de pé. Antes de atrair cliente, o terreno diz quem você é e pra quem você constrói.',
-     vistoria:['Portfólio no ar com 3 projetos','Perfil do Instagram posicionado','Link na bio roteando pro WhatsApp'],
-     rows:[
-       {first:true,t:'Define nicho e ângulo',sub:'Escreve em 1 frase quem você atende e o que entrega. Essa frase vira bio, portfólio e conteúdo.',
-        chips:[['ia','02 · ICP e Posicionamento',GO.app],['aula','Anti Prospecção',GO.membros]]},
-       {first:true,t:'Portfólio no Behance',sub:'3 projetos no ar. Sem projeto de cliente, monta projeto conceito. Conta igual.',
-        chips:[['tpl','Template de Portfólio (Figma)',GO.recursos],['ref','Behance Lorenzi',GO.behanceRef],['ref','Rissoli',GO.refRissoli]]},
-       {t:'Instagram posicionado',sub:'Bio que diz o que você faz, destaques arrumados, grid com 6 posts de projeto.',
-        chips:[['tpl','Template de Carrossel (PSD)',GO.recursos],['ia','07 · Copy Builder Carrossel',GO.app]]},
-       {t:'Link na bio roteando',sub:'Portfólio, prova e WhatsApp num lugar só. Template pronto pra copiar.',
-        chips:[['tpl','Template Link Bio',GO.recursos]]}
-     ]},
-    {num:'SEMANA 2',fase:'ESTRUTURA',cor:'#f5b23f',
-     titulo:'A atração de pé',
-     tese:'As paredes sobem. Conteúdo que qualifica trabalhando por você, sem prospectar ninguém.',
-     vistoria:['3 conteúdos publicados','Busca do Instagram te encontrando','Primeiro lead orgânico no radar'],
-     rows:[
-       {first:true,t:'Reels de qualificação N3',sub:'Alto valor, baixo alcance. Fala com quem contrata, não com quem dá like.',
-        chips:[['aula','Reels de qualificação',GO.membros]]},
-       {t:'SEO no Instagram',sub:'Nome e bio com o termo que o cliente busca. Você aparece quando procuram.',
-        chips:[['aula','Busca e SEO no Instagram',GO.membros]]},
-       {t:'Carrossel de projeto por semana',sub:'Caso real: o problema, o processo, o resultado.',
-        chips:[['tpl','Template de Carrossel (PSD)',GO.recursos],['ia','07 · Copy Builder Carrossel',GO.app],['ia','10 · Easy Image',GO.app]]},
-       {t:'Depoimento dos clientes que você já tem',sub:'Pede hoje, publica essa semana. Prova puxa prova.',
-        chips:[['proc','Coleta de depoimento',GO.membros]]},
-       {t:'Tráfego pago N3 (nitro puro)',sub:'Só se quiser acelerar. R$10 por dia já valida o criativo.',
-        chips:[['aula','Tráfego N3',GO.membros],['ia','08 · Copy Builder Ads',GO.app]]}
-     ]},
-    {num:'SEMANA 3',fase:'INSTALAÇÕES',cor:'#f26a43',
-     titulo:'Venda e gestão por dentro das paredes',
-     tese:'Água e luz instaladas antes do cliente entrar. Quando o lead chega, nada range.',
-     vistoria:['Atendimento com método no WhatsApp','Proposta e contrato prontos','Esteira de projeto montada no ClickUp'],
-     rows:[
-       {first:true,t:'Atendimento no WhatsApp com método',sub:'Investiga antes de dar preço. A IA conduz a conversa até o sim.',
-        chips:[['ia','03 · Atendimento e Negociação',GO.app],['ia','04 · Webson Vendedor',GO.app],['aula','Easy Sales',GO.membros]]},
-       {t:'Proposta e contrato profissionais',sub:'Os dois prontos. Você adapta, não cria do zero.',
-        chips:[['tpl','Proposta comercial',GO.recursos],['tpl','Contrato profissional',GO.recursos]]},
-       {t:'Briefing com formulário',sub:'As perguntas certas antes de abrir qualquer ferramenta. Briefing bom, projeto bom.',
-        chips:[['tpl','Formulários de briefing',GO.recursos]]},
-       {t:'Esteira no ClickUp e pasta modelo',sub:'Todo projeto entra igual: checklist, contrato, grupo, pasta no Drive. Nada se perde.',
-        chips:[['tool','Setup Builder (ClickUp)',GO.recursos],['tpl','Pasta modelo (Drive)',GO.recursos]]},
-       {t:'Precifica com margem',sub:'Planilha financeira e análise do projeto. Preço com critério, não com medo.',
-        chips:[['tpl','Planilha financeira',GO.recursos],['ia','01 · Análise Estratégica',GO.app]]}
-     ]},
-    {num:'SEMANA 4',fase:'ACABAMENTO & INAUGURAÇÃO',cor:'#4e7df6',
-     titulo:'Entrega no padrão. Fita cortada.',
-     tese:'O sistema constrói o mecânico 3× mais rápido. Você pensa. E a inauguração vira o próximo cliente.',
-     vistoria:['Primeira entrega aprovada no gate','Case publicado no Behance e no Instagram','Volante girando: entrega puxando lead'],
-     rows:[
-       {first:true,t:'Estratégia, copy e direção nessa ordem',sub:'Seção por seção, nunca tudo de uma vez. O piso já sai profissional.',
-        chips:[['ia','05 · Estrutura de Sites',GO.app],['ia','06 · Easy Copy',GO.app],['ia','09 · Diretor Criativo',GO.app]]},
-       {t:'Hero primeiro, página depois',sub:'Aprova o estilo com 1 seção. Ajuste rápido no lugar de refação inteira.',
-        chips:[['aula','Design Easy',GO.membros]]},
-       {t:'Monta com pré-moldados',sub:'Nunca do zero. 1.000+ componentes, backup em 3 cliques, efeito sob demanda.',
-        chips:[['tool','Extensão Easy Builder',GO.recursos],['tool','Backup WordPress (3 cliques)',GO.recursos],['ia','11 · Easy Coder',GO.app]]},
-       {t:'Gate de qualidade',sub:'A página só sai quando passa. O gate protege seu preço e sua reputação.',
-        chips:[['ia','12 · Analisador de Páginas',GO.app],['aula','Easy Optimize',GO.membros]]},
-       {t:'Inauguração: o case alimenta o funil',sub:'Portfólio atualizado, carrossel no ar, depoimento coletado. Volta pra Semana 1 girando.',
-        chips:[['tpl','Template de Portfólio (Figma)',GO.recursos],['tpl','Template de Carrossel (PSD)',GO.recursos],['proc','Coleta de depoimento',GO.membros]]}
-     ]}
-  ];
-
   function calcEl(){
     var w=h('div','pkcalc');
     var ph=h('div','pk-h');
@@ -3023,25 +2931,7 @@ window.PIN={"url":"https://br.pinterest.com/pin/942307922027644701/","video":"pi
     return w;}
 
   // ===== montagem =====
-  var PX=4300, PY=-40;
-  zone(PX-320,PY-150,2900,1340,'#e8a13c','O PLANO [10K26/27] · A PLANTA DA OBRA');
-  var tEl=h('div','ftitle','<small>O PLANO [10K26/27] · BOOTCAMP PRÁTICO · 4 SEMANAS · AGOSTO</small>R$10.000 por mês. Em 26 ou em 27, quem dita o ritmo é você.');
-  tEl.style.width='560px';
-  A.makeNode('Título',tEl,PX-260,PY-440);
-  note(PX+330,PY-440,340,'O Easy são os pré-moldados de sites. Isto aqui é a planta da obra do negócio todo, com os pré-moldados posicionados. O plano é de graça e é suficiente pra seguir sozinho. As ferramentas são o nitro.');
-  note(PX+730,PY-440,380,'<b>REGRAS DA OBRA</b><br>1. Faz na ordem. Cada semana assenta na anterior.<br>2. FAZ PRIMEIRO é inegociável. O resto acompanha.<br>3. Ferramenta que você não tem é degrau visível, não muro. O passo continua possível na unha.<br>4. Mata as pendências antes do bootcamp. A obra começa em agosto com o terreno limpo.');
-  note(PX-260,PY-95,700,'⚡ IA do ecossistema · ⚙ ferramenta · ▤ template pronto · ▶ aula na área de membros · ◉ referência real · ↻ processo. Tudo de acesso rápido: aperta, entra, executa.');
-
-  var cards=WEEKS.map(function(cfg,i){
-    return hideTab(A.makeNode(cfg.num,weekCard(cfg),PX-240+i*640,PY+40));});
-  A.addEdge(cards[0],cards[1],false);
-  A.addEdge(cards[1],cards[2],false);
-  A.addEdge(cards[2],cards[3],false);
-  A.addEdge(cards[3],cards[0],true);
-
   hideTab(A.makeNode('A Conta do 10k',calcEl(),-1085,920));
-  note(PX-240,PY+870,300,'Sem a ferramenta? O passo continua possível na unha. O nitro só encurta o caminho. Quando fizer sentido acelerar, você já sabe exatamente qual degrau destrava.');
-  note(PX+1680,PY+870,320,'A Semana 4 desagua na Semana 1. Cada entrega vira portfólio, indicação e o próximo cliente. É o mesmo Motor de Tijolos, agora com cronograma.');
 })();
 </script>
 
@@ -3335,9 +3225,6 @@ window.P2={
   var nIG2=hideTab(A.makeNode('Instagram Posicionado',ig2El(),FX+400,FY+6700,'p2-ig2'));
   var nLoop=A.makeNode('Looping',fico('#123c3c','<span class="lpspin" style="font-size:26px;color:#5fe0c8">↻</span>','Looping','o fim alimenta o começo','rgba(95,224,200,.4)'),FX+430,FY+7460,'p2-looping');
 
-  note('p2-note-wa',FX+880,FY+3560,260,'O lead cai num perfil comercial com catálogo = portfólio. A prova aparece antes do primeiro “oi”.');
-  note('p2-note-3caminhos',FX-320,FY+4880,240,'Três caminhos — call, PDF ou chat — um destino: oferta apresentada.');
-  note('p2-note-loop',FX+900,FY+7100,280,'Cliente satisfeito alimenta as 5 fontes de atenção. O funil da Parte 1 recomeça mais forte: looping.');
 
   // ===== conexões =====
   var nBio=document.querySelector('.node[data-nid="n-link-bio"]');
@@ -3509,11 +3396,7 @@ window.P2={
   // ===== montagem — abaixo da zona do Plano =====
   var PX=4300, PY=-40;
   zone(PX-320,PY+1400,2900,1750,'#e8a13c','OS 4 PILARES · O QUE TEM QUE CONSTRUIR');
-  var tEl=h('div','ftitle','<small>O PLANO [10K26/27] · OS 4 PILARES</small>É isso que tem que construir. E aqui está o ferramental.');
-  tEl.style.width='560px';
-  A.makeNode('Título',tEl,PX-260,PY+1270);
-  note(PX+330,PY+1270,380,'Cada tijolo é uma competência que TEM que existir na tua obra. Onde o ecossistema tem ferramenta, ela aparece embaixo do tijolo. Onde não tem, é 🔨 na unha: continua possível, você carrega o peso.');
-  note(PX+780,PY+1270,380,'<b>A RÉGUA DE CADA PILAR</b><br>Quanto mais perto da entrega, mais o sistema constrói. Quanto mais perto de você, mais você constrói. Pilar 1 é quase todo ferramentado. Pilar 4 é quase todo humano. É proposital: ferramenta compra tempo, caráter de obra não se terceiriza.');
+
 
   PILARES.forEach(function(cfg,i){
     hideTab(A.makeNode(cfg.num,pillarCard(cfg),PX-240+i*640,PY+1500));
@@ -3536,7 +3419,26 @@ window.P2={
 })();
 </script>
 
-<script>window.DEFAULT_STATE={"nodes":{"nTimeline":{"x":-2845,"y":3071,"s":1},"nWheel":{"x":6810,"y":1302,"s":1},"nBase":{"x":6992,"y":2065,"s":1},"nLegend":{"x":1908,"y":1790,"s":1},"n-titulo":{"x":1620,"y":-400,"s":1},"n-zona":{"x":2320,"y":160,"s":1},"n-behance":{"x":1941,"y":-551,"s":1},"n-sniper":{"x":2470,"y":-280,"s":1},"n-indicacoes":{"x":2710,"y":-280,"s":1},"n-trafego-gratuito":{"x":2990,"y":-180,"s":1},"n-busca-seo":{"x":1560,"y":120,"s":1},"n-video-n3-alto-valor-e-baixo-alcance":{"x":1520,"y":620,"s":1},"n-pesca-em-balde":{"x":1550,"y":1240,"s":1},"n-n3-trafego":{"x":3100,"y":270,"s":1},"n-instagram-posicionado":{"x":2390,"y":240,"s":1},"n-qualificacao":{"x":2020,"y":1380,"s":1},"n-link-bio":{"x":2380,"y":1260,"s":1},"n-trafego-pago-2":{"x":3100,"y":1320,"s":1},"n-nota":{"x":1620,"y":-260,"s":1},"n-nota-2":{"x":2860,"y":1940,"s":1},"n-titulo-2":{"x":-1640,"y":-300,"s":1},"n-zona-2":{"x":-1680,"y":-120,"s":1},"n-nota-3":{"x":-1640,"y":-140,"s":1},"n-balde-furado-torneira":{"x":-1508,"y":40,"s":1},"n-os-dois-balcoes-meio-fim":{"x":-2613,"y":63,"s":1},"n-furadeira-quadro-na-parede":{"x":-2623,"y":1231,"s":1},"n-o-80-20-da-tua-fase":{"x":-1547,"y":1192,"s":1},"n-os-12-meses":{"x":-1617,"y":1793,"s":1},"n-referencia-pinterest":{"x":-751,"y":3006,"s":1},"n-servico-solucao":{"x":-3790,"y":35,"s":1},"n-zona-3":{"x":3980,"y":-190,"s":1},"n-titulo-3":{"x":4040,"y":-480,"s":1},"n-nota-4":{"x":4630,"y":-480,"s":1},"n-nota-5":{"x":5030,"y":-480,"s":1},"n-nota-6":{"x":4040,"y":-135,"s":1},"n-semana-1":{"x":4060,"y":0,"s":1},"n-semana-2":{"x":4700,"y":0,"s":1},"n-semana-3":{"x":5340,"y":0,"s":1},"n-semana-4":{"x":6019,"y":-43,"s":1},"n-a-conta-do-10k":{"x":-4701,"y":188,"s":1},"n-nota-7":{"x":4060,"y":830,"s":1},"n-nota-8":{"x":5980,"y":830,"s":1},"p2-title":{"x":1620,"y":2140,"s":1},"p2-zone-conversa":{"x":1840,"y":2220,"s":1},"p2-zone-loop":{"x":1560,"y":5020,"s":1},"p2-behance":{"x":2000,"y":2320,"s":1},"p2-pv":{"x":2440,"y":2300,"s":1},"p2-whatsapp":{"x":2380,"y":3200,"s":1},"p2-reuniao":{"x":1920,"y":4080,"s":1},"p2-proposta":{"x":2367,"y":4127,"s":1},"p2-mensagem":{"x":2780,"y":4079,"s":1},"p2-oferta":{"x":2410,"y":4760,"s":1},"p2-fechado":{"x":2410,"y":5100,"s":1},"p2-insatisfeito":{"x":1820,"y":5100,"s":1},"p2-boaentrega":{"x":2140,"y":5420,"s":1},"p2-bomrel":{"x":2540,"y":5420,"s":1},"p2-satisfeito":{"x":2320,"y":5800,"s":1},"p2-depoimento":{"x":1880,"y":5780,"s":1},"p2-conteudo":{"x":1870,"y":6220,"s":1},"p2-indicacoes":{"x":2420,"y":6220,"s":1},"p2-trafego-gratuito":{"x":2720,"y":6200,"s":1},"p2-behance-icone":{"x":2990,"y":6200,"s":1},"p2-pesca":{"x":1600,"y":6480,"s":1},"p2-ig2":{"x":2380,"y":6640,"s":1},"p2-looping":{"x":2410,"y":7400,"s":1},"p2-note-wa":{"x":2860,"y":3500,"s":1},"p2-note-3caminhos":{"x":1660,"y":4820,"s":1},"p2-note-loop":{"x":2880,"y":7040,"s":1},"n-zona-4":{"x":3980,"y":1360,"s":1},"n-titulo-4":{"x":4094,"y":1004,"s":1},"n-nota-9":{"x":4630,"y":1230,"s":1},"n-nota-10":{"x":5080,"y":1230,"s":1},"n-pilar-01":{"x":4040,"y":1455,"s":1},"n-pilar-02":{"x":4677,"y":1463,"s":1},"n-pilar-03":{"x":5340,"y":1482,"s":1},"n-pilar-04":{"x":6045,"y":1465,"s":1}},"user":[],"edges":[],"delN":[],"delE":[]};</script>
+<script>window.DEFAULT_STATE={"nodes":{"nTimeline":{"x":-2845,"y":3071,"s":1},"nWheel":{"x":6810,"y":1302,"s":1},"nBase":{"x":6992,"y":2065,"s":1},"nLegend":{"x":1908,"y":1790,"s":1},"n-titulo":{"x":1620,"y":-400,"s":1},"n-zona":{"x":2320,"y":160,"s":1},"n-behance":{"x":1941,"y":-551,"s":1},"n-sniper":{"x":2470,"y":-280,"s":1},"n-indicacoes":{"x":2710,"y":-280,"s":1},"n-trafego-gratuito":{"x":2990,"y":-180,"s":1},"n-busca-seo":{"x":1560,"y":120,"s":1},"n-video-n3-alto-valor-e-baixo-alcance":{"x":1520,"y":620,"s":1},"n-pesca-em-balde":{"x":1550,"y":1240,"s":1},"n-n3-trafego":{"x":3100,"y":270,"s":1},"n-instagram-posicionado":{"x":2390,"y":240,"s":1},"n-qualificacao":{"x":2020,"y":1380,"s":1},"n-link-bio":{"x":2380,"y":1260,"s":1},"n-trafego-pago-2":{"x":3100,"y":1320,"s":1},"n-titulo-2":{"x":-1640,"y":-300,"s":1},"n-zona-2":{"x":-1680,"y":-120,"s":1},"n-balde-furado-torneira":{"x":-1508,"y":40,"s":1},"n-os-dois-balcoes-meio-fim":{"x":-2613,"y":63,"s":1},"n-furadeira-quadro-na-parede":{"x":-2623,"y":1231,"s":1},"n-o-80-20-da-tua-fase":{"x":-1547,"y":1192,"s":1},"n-os-12-meses":{"x":-1617,"y":1793,"s":1},"n-referencia-pinterest":{"x":-751,"y":3006,"s":1},"n-servico-solucao":{"x":-3790,"y":35,"s":1},"n-a-conta-do-10k":{"x":-4701,"y":188,"s":1},"p2-title":{"x":1620,"y":2140,"s":1},"p2-zone-conversa":{"x":1840,"y":2220,"s":1},"p2-zone-loop":{"x":1560,"y":5020,"s":1},"p2-behance":{"x":2000,"y":2320,"s":1},"p2-pv":{"x":2440,"y":2300,"s":1},"p2-whatsapp":{"x":2380,"y":3200,"s":1},"p2-reuniao":{"x":1920,"y":4080,"s":1},"p2-proposta":{"x":2367,"y":4127,"s":1},"p2-mensagem":{"x":2780,"y":4079,"s":1},"p2-oferta":{"x":2410,"y":4760,"s":1},"p2-fechado":{"x":2410,"y":5100,"s":1},"p2-insatisfeito":{"x":1820,"y":5100,"s":1},"p2-boaentrega":{"x":2140,"y":5420,"s":1},"p2-bomrel":{"x":2540,"y":5420,"s":1},"p2-satisfeito":{"x":2320,"y":5800,"s":1},"p2-depoimento":{"x":1880,"y":5780,"s":1},"p2-conteudo":{"x":1870,"y":6220,"s":1},"p2-indicacoes":{"x":2420,"y":6220,"s":1},"p2-trafego-gratuito":{"x":2720,"y":6200,"s":1},"p2-behance-icone":{"x":2990,"y":6200,"s":1},"p2-pesca":{"x":1600,"y":6480,"s":1},"p2-ig2":{"x":2380,"y":6640,"s":1},"p2-looping":{"x":2410,"y":7400,"s":1},"n-pilar-01":{"x":4040,"y":1455,"s":1},"n-pilar-02":{"x":4677,"y":1463,"s":1},"n-pilar-03":{"x":5340,"y":1482,"s":1},"n-pilar-04":{"x":6045,"y":1465,"s":1}},"user":[],"edges":[],"delN":[],"delE":[]};</script>
+<script>
+(function(){
+  // modo edicao: ✕ flutuante em todo no (inclusive os sem aba) — clique exclui
+  if(!/[?&]edit=1/.test(location.search))return;
+  var st=document.createElement('style');
+  st.textContent='.nx-float{position:absolute;top:-11px;right:-11px;width:22px;height:22px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:#141a28;color:#e05a5a;font-size:11px;line-height:1;display:grid;place-items:center;cursor:pointer;opacity:0;transition:opacity .15s;z-index:999;pointer-events:auto}.node:hover>.nx-float{opacity:1}.nx-float:hover{background:#e05a5a;color:#fff}';
+  document.head.appendChild(st);
+  window.addEventListener('load',function(){setTimeout(function(){
+    var A=window.CanvasAPI;if(!A||!A.deleteNode)return;
+    document.querySelectorAll('#world > .node').forEach(function(n){
+      if(n.querySelector('.nx-float'))return;
+      var b=document.createElement('button');b.className='nx-float';b.type='button';b.title='excluir do board';b.textContent='✕';
+      b.addEventListener('click',function(e){e.stopPropagation();e.preventDefault();A.deleteNode(n);});
+      b.addEventListener('pointerdown',function(e){e.stopPropagation();});
+      n.appendChild(b);});
+  },300);});
+})();
+</script>
+
 <script>
 (function(){
   if(/[?&]edit=1/.test(location.search))return;
