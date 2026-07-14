@@ -1379,7 +1379,9 @@
   }
   document.querySelectorAll('[data-add]').forEach(function(b){b.addEventListener('click',function(){addNode(b.dataset.add);});});
 
-  window.CanvasAPI={makeNode:makeNode,addEdge:addEdge,fit:fit,deleteNode:deleteNode};
+  window.CanvasAPI={makeNode:makeNode,addEdge:addEdge,fit:fit,deleteNode:deleteNode,
+    getView:function(){return{tx:tx,ty:ty,z:z};},
+    setView:function(v){tx=v.tx;ty=v.ty;z=v.z;apply();}};
   apply();
   document.querySelectorAll('#world > .node').forEach(function(n){
     if(!n.dataset.nid)n.dataset.nid=n.id||('n'+(nauto++));
@@ -2814,7 +2816,7 @@ window.PIN={"url":"https://br.pinterest.com/pin/942307922027644701/","video":"pi
 
   // ===== ESQUETES — palco de conceitos (à esquerda do canvas) =====
   A.makeNode('Título',h('div','ftitle','<small>ESQUETES · CONCEITOS</small>Rabiscos que explicam'),-1640,-300);
-  zone(-1680,-120,1280,3320,'#9e6cf2','ESQUETES — CONCEITOS SOLTOS');
+  zone(-1680,-120,1280,2480,'#9e6cf2','ESQUETES — CONCEITOS SOLTOS');
   hideTab(A.makeNode('Balde Furado + Torneira',baldeEl(),-1560,80));
   hideTab(A.makeNode('Os Dois Balcões — Meio × Fim',balcoesEl(),-1080,80));
   hideTab(A.makeNode('Furadeira > Quadro na parede',furadeiraEl(),-1580,900));
@@ -3395,7 +3397,7 @@ window.P2={
 
   // ===== montagem — abaixo da zona do Plano =====
   var PX=4300, PY=-40;
-  zone(PX-320,PY+1400,2900,1750,'#e8a13c','OS 4 PILARES · O QUE TEM QUE CONSTRUIR');
+  zone(PX-320,PY+1400,2900,1330,'#e8a13c','OS 4 PILARES · O QUE TEM QUE CONSTRUIR');
 
 
   PILARES.forEach(function(cfg,i){
@@ -3419,7 +3421,84 @@ window.P2={
 })();
 </script>
 
-<script>window.DEFAULT_STATE={"nodes":{"nTimeline":{"x":-2845,"y":3071,"s":1},"nWheel":{"x":6810,"y":1302,"s":1},"nBase":{"x":6992,"y":2065,"s":1},"nLegend":{"x":1908,"y":1790,"s":1},"n-titulo":{"x":1620,"y":-400,"s":1},"n-zona":{"x":2320,"y":160,"s":1},"n-behance":{"x":1941,"y":-551,"s":1},"n-sniper":{"x":2470,"y":-280,"s":1},"n-indicacoes":{"x":2710,"y":-280,"s":1},"n-trafego-gratuito":{"x":2990,"y":-180,"s":1},"n-busca-seo":{"x":1560,"y":120,"s":1},"n-video-n3-alto-valor-e-baixo-alcance":{"x":1520,"y":620,"s":1},"n-pesca-em-balde":{"x":1550,"y":1240,"s":1},"n-n3-trafego":{"x":3100,"y":270,"s":1},"n-instagram-posicionado":{"x":2390,"y":240,"s":1},"n-qualificacao":{"x":2020,"y":1380,"s":1},"n-link-bio":{"x":2380,"y":1260,"s":1},"n-trafego-pago-2":{"x":3100,"y":1320,"s":1},"n-titulo-2":{"x":-1640,"y":-300,"s":1},"n-zona-2":{"x":-1680,"y":-120,"s":1},"n-balde-furado-torneira":{"x":-1508,"y":40,"s":1},"n-os-dois-balcoes-meio-fim":{"x":-2613,"y":63,"s":1},"n-furadeira-quadro-na-parede":{"x":-2623,"y":1231,"s":1},"n-o-80-20-da-tua-fase":{"x":-1547,"y":1192,"s":1},"n-os-12-meses":{"x":-1617,"y":1793,"s":1},"n-referencia-pinterest":{"x":-751,"y":3006,"s":1},"n-servico-solucao":{"x":-3790,"y":35,"s":1},"n-a-conta-do-10k":{"x":-4701,"y":188,"s":1},"p2-title":{"x":1620,"y":2140,"s":1},"p2-zone-conversa":{"x":1840,"y":2220,"s":1},"p2-zone-loop":{"x":1560,"y":5020,"s":1},"p2-behance":{"x":2000,"y":2320,"s":1},"p2-pv":{"x":2440,"y":2300,"s":1},"p2-whatsapp":{"x":2380,"y":3200,"s":1},"p2-reuniao":{"x":1920,"y":4080,"s":1},"p2-proposta":{"x":2367,"y":4127,"s":1},"p2-mensagem":{"x":2780,"y":4079,"s":1},"p2-oferta":{"x":2410,"y":4760,"s":1},"p2-fechado":{"x":2410,"y":5100,"s":1},"p2-insatisfeito":{"x":1820,"y":5100,"s":1},"p2-boaentrega":{"x":2140,"y":5420,"s":1},"p2-bomrel":{"x":2540,"y":5420,"s":1},"p2-satisfeito":{"x":2320,"y":5800,"s":1},"p2-depoimento":{"x":1880,"y":5780,"s":1},"p2-conteudo":{"x":1870,"y":6220,"s":1},"p2-indicacoes":{"x":2420,"y":6220,"s":1},"p2-trafego-gratuito":{"x":2720,"y":6200,"s":1},"p2-behance-icone":{"x":2990,"y":6200,"s":1},"p2-pesca":{"x":1600,"y":6480,"s":1},"p2-ig2":{"x":2380,"y":6640,"s":1},"p2-looping":{"x":2410,"y":7400,"s":1},"n-pilar-01":{"x":4040,"y":1455,"s":1},"n-pilar-02":{"x":4677,"y":1463,"s":1},"n-pilar-03":{"x":5340,"y":1482,"s":1},"n-pilar-04":{"x":6045,"y":1465,"s":1}},"user":[],"edges":[],"delN":[],"delE":[]};</script>
+<script>window.DEFAULT_STATE={"nodes":{"nTimeline":{"x":-2620,"y":2430,"s":1},"nWheel":{"x":6810,"y":-358,"s":1},"nBase":{"x":6992,"y":405,"s":1},"nLegend":{"x":1908,"y":1790,"s":1},"n-titulo":{"x":1620,"y":-400,"s":1},"n-zona":{"x":2320,"y":160,"s":1},"n-behance":{"x":1941,"y":-551,"s":1},"n-sniper":{"x":2470,"y":-280,"s":1},"n-indicacoes":{"x":2710,"y":-280,"s":1},"n-trafego-gratuito":{"x":2990,"y":-180,"s":1},"n-busca-seo":{"x":1560,"y":120,"s":1},"n-video-n3-alto-valor-e-baixo-alcance":{"x":1520,"y":620,"s":1},"n-pesca-em-balde":{"x":1550,"y":1240,"s":1},"n-n3-trafego":{"x":3100,"y":270,"s":1},"n-instagram-posicionado":{"x":2390,"y":240,"s":1},"n-qualificacao":{"x":2020,"y":1380,"s":1},"n-link-bio":{"x":2380,"y":1260,"s":1},"n-trafego-pago-2":{"x":3100,"y":1320,"s":1},"n-titulo-2":{"x":-1640,"y":-300,"s":1},"n-zona-2":{"x":-1680,"y":-120,"s":1},"n-balde-furado-torneira":{"x":-1508,"y":40,"s":1},"n-os-dois-balcoes-meio-fim":{"x":-2613,"y":63,"s":1},"n-furadeira-quadro-na-parede":{"x":-2623,"y":1231,"s":1},"n-o-80-20-da-tua-fase":{"x":-1547,"y":1192,"s":1},"n-os-12-meses":{"x":-1617,"y":1793,"s":1},"n-referencia-pinterest":{"x":-1380,"y":2430,"s":1},"n-servico-solucao":{"x":-3790,"y":35,"s":1},"n-a-conta-do-10k":{"x":-3790,"y":769,"s":1},"p2-title":{"x":1620,"y":2140,"s":1},"p2-zone-conversa":{"x":1840,"y":2220,"s":1},"p2-zone-loop":{"x":1560,"y":5020,"s":1},"p2-behance":{"x":2000,"y":2320,"s":1},"p2-pv":{"x":2440,"y":2300,"s":1},"p2-whatsapp":{"x":2380,"y":3200,"s":1},"p2-reuniao":{"x":1920,"y":4080,"s":1},"p2-proposta":{"x":2367,"y":4127,"s":1},"p2-mensagem":{"x":2780,"y":4079,"s":1},"p2-oferta":{"x":2410,"y":4760,"s":1},"p2-fechado":{"x":2410,"y":5100,"s":1},"p2-insatisfeito":{"x":1820,"y":5100,"s":1},"p2-boaentrega":{"x":2140,"y":5420,"s":1},"p2-bomrel":{"x":2540,"y":5420,"s":1},"p2-satisfeito":{"x":2320,"y":5800,"s":1},"p2-depoimento":{"x":1880,"y":5780,"s":1},"p2-conteudo":{"x":1870,"y":6220,"s":1},"p2-indicacoes":{"x":2420,"y":6220,"s":1},"p2-trafego-gratuito":{"x":2720,"y":6200,"s":1},"p2-behance-icone":{"x":2990,"y":6200,"s":1},"p2-pesca":{"x":1600,"y":6480,"s":1},"p2-ig2":{"x":2380,"y":6640,"s":1},"p2-looping":{"x":2410,"y":7400,"s":1},"n-pilar-01":{"x":4040,"y":-205,"s":1},"n-pilar-02":{"x":4677,"y":-197,"s":1},"n-pilar-03":{"x":5340,"y":-178,"s":1},"n-pilar-04":{"x":6045,"y":-195,"s":1},"n-zona-3":{"x":3980,"y":-300,"s":1}},"user":[],"edges":[],"delN":[],"delE":[]};</script>
+<script>
+(function(){
+  // ===== views de apresentacao: barra inferior + teclas 1-6, V volta =====
+  var GROUPS=[
+    {k:'1',label:'Tudo',ids:null},
+    {k:'2',label:'Esquetes',ids:['n-titulo-2','n-zona-2','n-balde-furado-torneira','n-os-dois-balcoes-meio-fim','n-furadeira-quadro-na-parede','n-o-80-20-da-tua-fase','n-os-12-meses','n-servico-solucao','n-a-conta-do-10k','nTimeline','n-referencia-pinterest']},
+    {k:'3',label:'Atração',ids:['n-titulo','n-zona','n-behance','n-sniper','n-indicacoes','n-trafego-gratuito','n-busca-seo','n-video-n3-alto-valor-e-baixo-alcance','n-pesca-em-balde','n-n3-trafego','n-instagram-posicionado','n-qualificacao','n-link-bio','n-trafego-pago-2','nLegend']},
+    {k:'4',label:'Conversa',pre:'p2-'},
+    {k:'5',label:'Pilares',ids:['n-zona-3','n-pilar-01','n-pilar-02','n-pilar-03','n-pilar-04']},
+    {k:'6',label:'Motor',ids:['nWheel','nBase']}
+  ];
+  var back=[], anim=null, btns={};
+  function api(){return window.CanvasAPI&&window.CanvasAPI.getView?window.CanvasAPI:null;}
+  function nodesFor(g){
+    var all=Array.prototype.slice.call(document.querySelectorAll('#world > .node'));
+    if(!g.ids&&!g.pre)return all;
+    return all.filter(function(n){var id=n.dataset.nid||'';
+      return g.pre?id.indexOf(g.pre)===0:g.ids.indexOf(id)>=0;});}
+  function bboxOf(ns){var x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
+    ns.forEach(function(n){var x=parseFloat(n.style.left)||0,y=parseFloat(n.style.top)||0,sc=parseFloat(n.dataset.scale)||1,w=n.offsetWidth*sc,h=n.offsetHeight*sc;
+      if(x<x0)x0=x;if(y<y0)y0=y;if(x+w>x1)x1=x+w;if(y+h>y1)y1=y+h;});
+    return{x:x0,y:y0,w:x1-x0,h:y1-y0};}
+  function viewForBox(b){
+    var vp=document.getElementById('viewport').getBoundingClientRect(),pd=70,barH=70;
+    var z=Math.max(.03,Math.min((vp.width-pd*2)/b.w,(vp.height-pd*2-barH)/b.h,1.25));
+    return{tx:(vp.width-b.w*z)/2-b.x*z,ty:(vp.height-barH-b.h*z)/2-b.y*z,z:z};}
+  function flyTo(v1,push){
+    var A=api();if(!A)return;
+    var v0=A.getView();
+    if(push!==false)back.push(v0);
+    if(anim)cancelAnimationFrame(anim);
+    var vp=document.getElementById('viewport').getBoundingClientRect();
+    function ctr(v){return{x:(vp.width/2-v.tx)/v.z,y:(vp.height/2-v.ty)/v.z};}
+    var c0=ctr(v0),c1=ctr(v1),t0=performance.now(),D=750;
+    function step(now){var t=Math.min(1,(now-t0)/D),e=t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+      var zz=v0.z*Math.pow(v1.z/v0.z,e);
+      var cx=c0.x+(c1.x-c0.x)*e,cy=c0.y+(c1.y-c0.y)*e;
+      A.setView({tx:vp.width/2-cx*zz,ty:vp.height/2-cy*zz,z:zz});
+      if(t<1)anim=requestAnimationFrame(step);else anim=null;}
+    anim=requestAnimationFrame(step);}
+  function setActive(g){Object.keys(btns).forEach(function(k){btns[k].classList.toggle('on',!!g&&g.k===k);});}
+  function go(g){var ns=nodesFor(g);if(!ns.length)return;flyTo(viewForBox(bboxOf(ns)));setActive(g);}
+  function goBack(){var v=back.pop();if(v){flyTo(v,false);setActive(null);}}
+  var st=document.createElement('style');
+  st.textContent='.viewbar{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);display:flex;gap:4px;align-items:center;padding:5px;border-radius:999px;background:rgba(10,14,24,.82);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:9998;box-shadow:0 8px 30px rgba(0,0,0,.45)}'
+    +'.viewbar button{display:flex;align-items:center;gap:7px;border:none;background:transparent;color:rgba(235,240,250,.75);font:600 12.5px/1 system-ui,-apple-system,sans-serif;padding:8px 13px;border-radius:999px;cursor:pointer;white-space:nowrap;transition:background .15s,color .15s}'
+    +'.viewbar button:hover{background:rgba(255,255,255,.08);color:#fff}'
+    +'.viewbar button.on{background:rgba(232,161,60,.18);color:#f0b45f}'
+    +'.viewbar .kb{display:inline-grid;place-items:center;min-width:16px;height:16px;padding:0 3px;border-radius:4px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.14);font:700 10px/1 system-ui;color:rgba(235,240,250,.55)}'
+    +'.viewbar .sep{width:1px;height:18px;background:rgba(255,255,255,.12);margin:0 3px}'
+    +'@media (max-width:760px){.viewbar .kb{display:none}}';
+  document.head.appendChild(st);
+  window.addEventListener('load',function(){setTimeout(function(){
+    if(!api())return;
+    var bar=document.createElement('div');bar.className='viewbar';
+    GROUPS.forEach(function(g){
+      var b=document.createElement('button');b.type='button';
+      b.innerHTML='<span class="kb">'+g.k+'</span>'+g.label;
+      b.addEventListener('click',function(){go(g);});
+      btns[g.k]=b;bar.appendChild(b);});
+    var sp=document.createElement('div');sp.className='sep';bar.appendChild(sp);
+    var bk=document.createElement('button');bk.type='button';
+    bk.innerHTML='<span class="kb">V</span>Voltar';
+    bk.addEventListener('click',goBack);bar.appendChild(bk);
+    document.body.appendChild(bar);
+  },400);});
+  window.addEventListener('keydown',function(e){
+    var ae=document.activeElement;
+    if(ae&&(ae.isContentEditable||ae.tagName==='INPUT'||ae.tagName==='TEXTAREA'))return;
+    if(e.metaKey||e.ctrlKey||e.altKey)return;
+    var g=null;for(var i=0;i<GROUPS.length;i++)if(GROUPS[i].k===e.key)g=GROUPS[i];
+    if(g){e.preventDefault();go(g);}
+    else if(e.key==='v'||e.key==='V'||e.key==='0'){e.preventDefault();goBack();}
+  });
+})();
+</script>
+
 <script>
 (function(){
   // modo edicao: ✕ flutuante em todo no (inclusive os sem aba) — clique exclui
